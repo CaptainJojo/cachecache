@@ -19,6 +19,8 @@ services:
         build: nginx
         ports:
             - 8080:80
+        links:
+            - node
         volumes_from:
             - php
         volumes:
@@ -47,3 +49,9 @@ services:
           - nginx
         volumes:
           - ./varnish:/etc/varnish
+    node:
+      build: node
+      volumes:
+          - ./cachecacheapi:/app
+      ports:
+          - "3000:3000"
