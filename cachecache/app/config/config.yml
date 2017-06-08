@@ -9,7 +9,7 @@ parameters:
     locale: en
 
 framework:
-    #esi: ~
+    esi: { enabled: true }
     #translator: { fallbacks: ['%locale%'] }
     secret: '%secret%'
     router:
@@ -32,6 +32,9 @@ framework:
     assets: ~
     php_errors:
         log: true
+    cache:
+        app: cache.adapter.redis
+        default_redis_provider: "redis://redis"
 
 # Twig Configuration
 twig:

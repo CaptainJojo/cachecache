@@ -8,6 +8,12 @@ backend default {
     .port = "80";
 }
 
+sub vcl_recv {
+    // Add a Surrogate-Capability header to announce ESI support.
+    set req.http.Surrogate-Capability = "abc=ESI/1.0";
+}
+
+
 sub vcl_backend_response {
     # Happens after we have read the response headers from the backend.
     #
@@ -35,6 +41,11 @@ sub vcl_backend_response {
     if (beresp.ttl > 0s) {
         set beresp.http.X-Url  = bereq.url;
         set beresp.http.X-Host = bereq.http.host;
+    }
+
+    if (beresp.http.Surrogate-Control ~ "ESI/1.0") {
+        unset beresp.http.Surrogate-Control;
+        set beresp.do_esi = true;
     }
 
     # Some more usefull headers for debug
