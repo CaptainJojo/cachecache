@@ -4,3 +4,14 @@
     <div style="border:1px solid blue">{{ render_esi(url('esi', { 'cache': 5 })) }}</div>
     <div style="border:1px solid red">{{ render_esi(url('esi', { 'cache': 10 })) }}</div>
 {% endblock %}
+
+{% block javascripts %}
+<script>
+  if('serviceWorker' in navigator) {
+    navigator.serviceWorker
+        .register("{{ asset('bundles/app/js/sw.js') }}")
+        .then(function() { console.log("Service Worker Registered"); });
+    }
+</script>
+  <script src="{{ asset('bundles/app/js/localstorage.js') }}"></script>
+{% endblock %}
