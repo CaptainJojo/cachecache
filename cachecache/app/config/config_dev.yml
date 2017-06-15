@@ -11,6 +11,9 @@ web_profiler:
     toolbar: true
     intercept_redirects: false
 
+csa_guzzle:
+    profiler: '%kernel.debug%'
+
 monolog:
     handlers:
         main:

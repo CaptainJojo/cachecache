@@ -8,6 +8,13 @@ imports:
 parameters:
     locale: en
 
+csa_guzzle:
+    clients:
+        cachecache_api:
+            config: # you can specify the options as in http://docs.guzzlephp.org/en/latest/quickstart.html#creating-a-client
+                base_uri: http://cachecacheapi.dev
+                timeout: 2.0
+
 framework:
     esi: { enabled: true }
     #translator: { fallbacks: ['%locale%'] }

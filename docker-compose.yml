@@ -20,6 +20,8 @@ services:
             - ./logs/symfony:/var/www/symfony/app/logs
         links:
             - redis
+        extra_hosts:
+           - "cachecacheapi.dev:172.19.0.6"
 
     nginx:
         build: nginx
